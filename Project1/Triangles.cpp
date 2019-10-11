@@ -21,13 +21,14 @@ enum Attrib_IDs { vPosition = 0 };
 GLuint  VAOs[NumVAOs];
 GLuint  Buffers[NumBuffers];
 
-const GLuint  NumVertices = 6;
+const GLuint  NumVertices = 12; // Number of vertices
 
 //----------------------------------------------------------------------------
 //
 // init
 //
 #define BUFFER_OFFSET(a) ((void*)(a))
+
 
 
 void
@@ -37,8 +38,13 @@ init(void)
 	glBindVertexArray(VAOs[Triangles]);
 
 	GLfloat  vertices[NumVertices][2] = {
-		{ -0.90f, -0.90f }, {  0.85f, -0.90f }, { -0.90f,  0.85f },  // Triangle 1
-		{  0.90f, -0.85f }, {  0.90f,  0.90f }, { -0.85f,  0.90f }   // Triangle 2
+		//square one
+		{ -0.90f, -0.90f }, {  -0.80f, -0.80f }, { -0.90f,  -0.80f },  // Triangle 1 , percentage of screen space where vertix is placed (0 is centre of axis)
+		{ -0.90f, -0.90f }, {  -0.80f,  -0.80f }, { -0.80f,  -0.90f },   // Triangle 2
+
+		//square two
+		{ -0.80f, -0.80f }, {  -0.70f, -0.70f }, { -0.80f,  -0.70f },
+		{ -0.80f, -0.80f }, {  -0.70f, -0.70f }, { -0.70f,  -0.80f },
 	};
 
 	glGenBuffers(NumBuffers, Buffers);
@@ -87,7 +93,7 @@ main(int argc, char** argv)
 {
 	glfwInit();
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Triangles", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(800, 800, "Triangles", NULL, NULL);
 
 	glfwMakeContextCurrent(window);
 	glewInit();
